@@ -7,4 +7,20 @@
 还有回顾一下遇到过的错误，学过的命令，之前在vim里写过笔记，但不知道是不是我没保存，全部不见了，后面又重新写，还是不见了。
 我tm服了，所以现在来写这个markdown，我在OneNote里也记过，不过总觉得还是提交到仓库里更有意义，所以现在来写这个markdown
 希望今天能搞完吧。
-**docker-compose up -d
+```bash
+docker-compose up -d
+docker-compose down
+docker exec -it my-monitor /bin/bash
+ping java-service
+docker logs -f my-monitor
+docker ps -a
+docker images
+docker network ls
+docker network rm net-monitor-zone
+docker compose ps
+docker compose logs -f
+docker compose up --build -d
+
+
+SHOW DATABASES;
+USE net_monitor;
