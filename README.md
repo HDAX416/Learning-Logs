@@ -38,7 +38,98 @@ Remove-Item -Recurse -Force .\mysql_data
 心累，我感觉ai都会累死了，把文件传给它，然后删除镜像，数据库数据，全部重新构建，但还是没有连接上，累累累累累，应该是到目前为止最累的一次了
 感觉该系统性的学习这些东西了。加油吧，说起来下午倒是发呆了许久，感觉还挺有学习这些的欲望。
 
---
+##
 5.6 
 重新复习，然后接着学习计划。早上很困，昨天真的累到了，趴在桌上回忆起高中时期的学习状态，学习习惯，如何让我更好记住学习过的东西，知识图谱，输出大于输入，多思考，多发呆。
 梦言。压力上来了，心慌，但又觉得我是不是像之前一样把困难扩大化，解决之法就是直接去做，要系统学吗？在教室学习效率感觉很低，又提醒自己千万不能着急。简历怎么搞?运动？不管，先复习。
+##
+5.8
+简历做完，现在开始复习技术栈。
+```
+mysql -h 127.0.0.1 -P 3307 -u root -p
+docker exec -it monitor-db mysql -u root -p123456
+CREATE DATABASE sql_practice;
+USE sql_practice;
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO users (username, email) VALUES
+('alice', 'alice@example.com'),
+('bob', 'bob@example.com'),
+('charlie', NULL);
+SELECT * FROM users;
+SELECT username, email FROM users WHERE email IS NOT NULL;
+UPDATE users SET email = 'charlie@example.com' WHERE username = 'charlie';
+DELETE FROM users WHERE username = 'bob';
+
+查询数据
+-- 查询所有列
+SELECT * FROM students;
+-- 查询指定列
+SELECT name, age FROM students;
+-- 带条件查询
+SELECT * FROM students WHERE age > 20;
+-- 排序
+SELECT * FROM students ORDER BY grade DESC;  -- 降序
+-- 限制返回行数
+SELECT * FROM students LIMIT 3;
+
+插入数据
+-- 插入完整一行
+INSERT INTO students (id, name, age, grade)
+VALUES (3, '王五', 22, 88);
+-- 只插入部分列（其他列需允许 NULL 或有默认值）
+INSERT INTO students (name, age) VALUES ('赵六', 19);
+
+更新数据
+-- 更新特定行的某一列
+UPDATE students SET grade = 90 WHERE name = '张三';
+-- 更新多列
+UPDATE students SET age = 23, grade = 95 WHERE id = 2;
+
+Attention:忘写WHERE会更新整张表
+
+删除数据
+-- 删除特定行
+DELETE FROM students WHERE name = '赵六';
+-- 删除所有行（保留表结构）
+DELETE FROM students;
+
+创建表
+CREATE TABLE students (
+    id INT PRIMARY KEY,          -- 整数，主键
+    name VARCHAR(50) NOT NULL,   -- 可变长度字符串，最长50，不允许空
+    age INT,
+    grade DECIMAL(5,2)           -- 总位数5，小数2位，如 98.50
+);
+
+修改表结构
+-- 添加列
+ALTER TABLE students ADD email VARCHAR(100);
+-- 删除列
+ALTER TABLE students DROP COLUMN email;
+
+删除表
+DROP TABLE students;  -- 删除整个表及数据
+
+WHERE name = '张三'
+WHERE age <> 20 不等于
+WHERE age BETWEEN 18 AND 22
+WHERE grade >= 90
+WHERE name LIKE '张%'（以张开头的名字）
+WHERE id IN (1, 3, 5)
+WHERE age>20 AND grade>80
+
+聚合函数与分组
+-- 计算平均分
+SELECT AVG(grade) FROM students;
+-- 分组统计每个年龄的平均分
+SELECT age, AVG(grade) FROM students GROUP BY age;
+-- 分组后过滤（HAVING 用于分组后条件）
+SELECT age, AVG(grade) FROM students 
+GROUP BY age 
+HAVING AVG(grade) > 85;
+```
