@@ -133,3 +133,42 @@ SELECT age, AVG(grade) FROM students
 GROUP BY age 
 HAVING AVG(grade) > 85;
 ```
+
+##
+5.11
+MySQL结束，今天做完了知识图谱，从增删改查，对表操作，where子句，模糊化查询，到升降序，基本函数
+交并差集，到子查询，表关联，索引，视图。需要记忆的还是挺多的。晚上开始Redis，明天搞完！
+```
+redis-server
+redis-cli --raw
+SET name hong
+GET name
+DEL name
+EXISTS name
+KEYS *
+#慎用 FLUSHALL
+TTL name
+#设置生存时间
+EXPIRE name 10
+#设置键值对
+SETEX name 4 hong
+LPUSH letter a
+LRANGE letter 0 -1
+#索引从大到小，与数组相反
+LPUSH letter b c d
+RPUSH letter e
+RPOP letter
+LPOP letter 2
+LLEN letter
+RPOPLPUSH
+
+
+
+
+
+
+
+
+
+
+```
